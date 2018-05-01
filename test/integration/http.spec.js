@@ -40,8 +40,9 @@ describe('Content', function () {
           const created = response.body;
 
           expect(created._id).to.exist;
-          expect(created.group).to.exist;
+          expect(created.type.en).to.exist;
           expect(created.title.en).to.exist;
+          expect(created.body.en).to.exist;
 
           done(error, response);
 
@@ -92,8 +93,9 @@ describe('Content', function () {
           const found = response.body;
           expect(found._id).to.exist;
           expect(found._id).to.be.equal(content._id.toString());
-          expect(found.group).to.be.equal(content.group);
+          expect(found.type.en).to.be.equal(content.type.en);
           expect(found.title.en).to.be.equal(content.title.en);
+          expect(found.body.en).to.be.equal(content.body.en);
 
           done(error, response);
 
@@ -119,8 +121,9 @@ describe('Content', function () {
 
           expect(patched._id).to.exist;
           expect(patched._id).to.be.equal(content._id.toString());
-          expect(patched.group).to.be.equal(content.group);
+          expect(patched.type.en).to.be.equal(content.type.en);
           expect(patched.title.en).to.be.equal(content.title.en);
+          expect(patched.body.en).to.be.equal(content.body.en);
 
           done(error, response);
 
@@ -146,8 +149,9 @@ describe('Content', function () {
 
           expect(puted._id).to.exist;
           expect(puted._id).to.be.equal(content._id.toString());
-          expect(puted.group).to.be.equal(content.group);
+          expect(puted.type.en).to.be.equal(content.type.en);
           expect(puted.title.en).to.be.equal(content.title.en);
+          expect(puted.body.en).to.be.equal(content.body.en);
 
           done(error, response);
 
@@ -169,8 +173,9 @@ describe('Content', function () {
 
           expect(deleted._id).to.exist;
           expect(deleted._id).to.be.equal(content._id.toString());
-          expect(deleted.group).to.be.equal(content.group);
+          expect(deleted.type.en).to.be.equal(content.type.en);
           expect(deleted.title.en).to.be.equal(content.title.en);
+          expect(deleted.body.en).to.be.equal(content.body.en);
 
           done(error, response);
 

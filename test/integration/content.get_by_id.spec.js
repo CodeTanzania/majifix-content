@@ -60,7 +60,6 @@ describe('Content', function () {
           expect(fields).to.have.length(2);
           _.map([
             'jurisdiction',
-            'group',
             'type',
             'body',
             'publishedAt'

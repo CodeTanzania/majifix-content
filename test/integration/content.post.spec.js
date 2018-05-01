@@ -30,7 +30,7 @@ describe('Content', function () {
           expect(error).to.not.exist;
           expect(created).to.exist;
           expect(created._id).to.eql(content._id);
-          expect(created.group).to.eql(content.group);
+          expect(created.type.en).to.eql(content.type.en);
           expect(created.title.en).to.eql(content.title.en);
           done(error, created);
         });
@@ -51,7 +51,7 @@ describe('Content', function () {
           expect(error).to.not.exist;
           expect(created).to.exist;
           expect(created._id).to.eql(content._id);
-          expect(created.group).to.eql(content.group);
+          expect(created.type.en).to.eql(content.type.en);
           expect(created.title.en).to.eql(content.title.en);
           done(error, created);
         });

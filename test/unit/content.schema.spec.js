@@ -31,23 +31,6 @@ describe('Content', function () {
 
     });
 
-    it('should have group field', function () {
-
-      const group = Content.schema.tree.group;
-      const instance = Content.schema.paths.group.instance;
-
-      expect(instance).to.be.equal('String');
-      expect(group).to.exist;
-      expect(group).to.be.an('object');
-      expect(group.type).to.be.a('function');
-      expect(group.type.name).to.be.equal('String');
-      expect(group.required).to.be.true;
-      expect(group.trim).to.be.true;
-      expect(group.index).to.be.true;
-      expect(group.searchable).to.be.true;
-
-    });
-
     describe('type', function () {
 
       it('should be an embedded subdocument', function () {
