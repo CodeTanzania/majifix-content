@@ -1,0 +1,13 @@
+{
+  "name": "majifix-content",
+  "version": "1.0.0",
+  "description": "A representation of common information (i.e FAQ, Fee, Tarrifs etc) that are published by a jurisdiction for general public.",
+  "title": "MajiFix Account",
+  "url": "https://majifix-content.herokuapp.com/v1.0.0",
+  "sampleUrl": "https://majifix-content.herokuapp.com/v1.0.0",
+  "template":
+  {
+    "withCompare": true,
+    "withGenerator": true
+  }
+}

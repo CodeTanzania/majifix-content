@@ -1,0 +1,70 @@
+{
+  "name": "majifix-content",
+  "version": "0.1.0",
+  "description": "A representation of common information (i.e FAQ, Fee, Tarrifs etc) that are published by a jurisdiction for general public.",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt test",
+    "integration": "grunt integration",
+    "dev": "BASE_PATH=./examples nodemon ./examples/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CodeTanzania/majifix-content.git"
+  },
+  "keywords": [
+    "majifix",
+    "codetanzania",
+    "open311",
+    "311",
+    "tanzania",
+    "account",
+    "customer",
+    "client"
+  ],
+  "author": {
+    "name": "lykmapipo",
+    "email": "lallyelias87@gmail.com",
+    "url": "https://github.com/lykmapipo"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CodeTanzania/majifix-content/issues"
+  },
+  "homepage": "https://github.com/CodeTanzania/majifix-content",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "faker": "git+https://github.com/Marak/faker.js.git",
+    "grunt": "^1.0.2",
+    "grunt-apidoc": "^0.11.0",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-watch": "^1.0.1",
+    "grunt-mocha-test": "^0.13.3",
+    "jshint-stylish": "^2.2.1",
+    "mocha": "^5.1.1",
+    "nodemon": "^1.17.3",
+    "sinon": "^5.0.1",
+    "sinon-chai": "^3.0.0",
+    "sinon-mongoose": "^2.1.1",
+    "superagent": "^3.8.3",
+    "supertest": "^3.0.0"
+  },
+  "dependencies": {
+    "@lykmapipo/express-common": "^0.5.1",
+    "@lykmapipo/express-request-extra": "^0.1.0",
+    "@lykmapipo/express-router-extra": "^0.1.2",
+    "@lykmapipo/mongoose-faker": "^0.2.0",
+    "async": "^2.6.0",
+    "express": "^4.16.3",
+    "express-mquery": "^1.0.2",
+    "lodash": "^4.17.10",
+    "moment": "^2.22.1",
+    "mongoose": "^5.0.16",
+    "mongoose-locale-schema": "^0.1.0",
+    "mongoose-rest-actions": "^0.6.3"
+  },
+  "engines": {
+    "node": ">=8.6.0",
+    "npm": ">=5.3.0"
+  }
+}
