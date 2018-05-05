@@ -61,10 +61,6 @@ describe('Content', function () {
           expect(error).to.not.exist;
           expect(response).to.exist;
 
-          //assert headers
-          expect(response.headers['last-modified'])
-            .to.exist;
-
           //assert payload
           const result = response.body;
           expect(result.data).to.exist;
