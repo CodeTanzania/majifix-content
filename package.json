@@ -42,7 +42,7 @@
   },
   "homepage": "https://github.com/CodeTanzania/majifix-content",
   "sandbox": {
-    "url": "https://majifix-content.herokuapp.com/v0.1.0/statuses"
+    "url": "https://majifix-content.herokuapp.com/v0.1.0/contents"
   },
   "devDependencies": {
     "body-parser": "^1.18.2",
