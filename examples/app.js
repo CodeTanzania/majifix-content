@@ -1,17 +1,21 @@
 'use strict';
 
-//ensure mongo uri
+/* ensure mongo uri */
 process.env.MONGODB_URI =
   (process.env.MONGODB_URI || 'mongodb://localhost/majifix-content');
 
-//dependencies
+
+/* dependencies */
 const path = require('path');
+const _ = require('lodash');
 const async = require('async');
 const mongoose = require('mongoose');
-const { Content, app } = require(path.join(__dirname, '..'));
-const samples = require('./samples')(20);
+const { Jurisdiction } = require('majifix-jurisdiction');
+const { Content, app, info } = require(path.join(__dirname, '..'));
+let samples = require('./samples')(20);
 
-//connect to mongoose
+
+/* connect to mongoose */
 mongoose.connect(process.env.MONGODB_URI);
 
 
@@ -25,16 +29,38 @@ function boot() {
       });
     },
 
-    function seed(next) {
-      //fake contents
+    function seedJurisdiction(next) {
+      const jurisdiction = Jurisdiction.fake();
+      Jurisdiction.remove(function ( /*error, results*/ ) {
+        jurisdiction.post(next);
+      });
+    },
+
+    function seed(jurisdiction, next) {
+      /* fake contents */
+      samples = _.map(samples, function (sample, index) {
+        if ((index % 2 === 0)) {
+          sample.jurisdiction = jurisdiction;
+        }
+        return sample;
+      });
+
+      /* fake contents */
       Content.create(samples, next);
     }
 
   ], function (error, results) {
 
-    //fire the app
+    /* expose module info */
+    app.get('/', function (request, response) {
+      response.status(200);
+      response.json(info);
+    });
+
+    /* fire the app */
     app.start(function (error, env) {
-      console.log(`visit http://0.0.0.0:${env.PORT}/v1.0.0/contents`);
+      console.log(
+        `visit http://0.0.0.0:${env.PORT}/v${info.version}/contents`);
     });
 
   });

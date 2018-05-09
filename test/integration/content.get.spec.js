@@ -4,15 +4,24 @@
 const path = require('path');
 const _ = require('lodash');
 const async = require('async');
-const chai = require('chai');
-const mongoose = require('mongoose');
-const expect = chai.expect;
+const { expect } = require('chai');
+const { Jurisdiction } = require('majifix-jurisdiction');
 const { Content } = require(path.join(__dirname, '..', '..'));
 
 describe('Content', function () {
 
+  let jurisdiction;
+
   before(function (done) {
-    mongoose.connect('mongodb://localhost/majifix-content', done);
+    Jurisdiction.remove(done);
+  });
+
+  before(function (done) {
+    jurisdiction = Jurisdiction.fake();
+    jurisdiction.post(function (error, created) {
+      jurisdiction = created;
+      done(error, created);
+    });
   });
 
   before(function (done) {
@@ -24,11 +33,13 @@ describe('Content', function () {
     let contents;
 
     before(function (done) {
-      const fakes = _.map(Content.fake(32), function (content) {
-        return function (next) {
-          content.post(next);
-        };
-      });
+      const fakes =
+        _.map(Content.fake(32), function (content) {
+          return function (next) {
+            content.jurisdiction = jurisdiction;
+            content.post(next);
+          };
+        });
       async
       .parallel(fakes, function (error, created) {
         contents = created;
@@ -148,6 +159,10 @@ describe('Content', function () {
 
   after(function (done) {
     Content.remove(done);
+  });
+
+  after(function (done) {
+    Jurisdiction.remove(done);
   });
 
 });

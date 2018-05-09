@@ -2,7 +2,6 @@
 
 
 /**
- * @module majifix-content
  * @name majifix-content
  * @description A representation of common information 
  * (i.e FAQ, Fee, Tarrifs etc) that are published by a jurisdiction 
@@ -13,7 +12,7 @@
  * @version 0.1.0
  * @example
  * 
- * const {app} = require('@lykmapipo/majifix-content');
+ * const { app } = require('@lykmapipo/majifix-content');
  *
  * ...
  * 
@@ -24,9 +23,34 @@
  */
 
 
-/*** dependencies */
+/* dependencies */
 const path = require('path');
+const _ = require('lodash');
 const app = require('@lykmapipo/express-common');
+
+
+/* declarations */
+const pkg = require(path.join(__dirname, 'package.json'));
+const fields = [
+  'name',
+  'description',
+  'version',
+  'license',
+  'homepage',
+  'repository',
+  'bugs',
+  'sandbox',
+  'contributors'
+];
+const info = _.merge({}, _.pick(pkg, fields));
+
+
+/* ensure api version */
+process.env.API_VERSION = (process.env.API_VERSION || info.version);
+
+
+/* export package(module) info */
+exports.info = info;
 
 
 /*** import models */
@@ -34,27 +58,26 @@ const Content =
   require(path.join(__dirname, 'lib', 'content.model'));
 
 
-/**import routers*/
+/* import routers */
 const router =
   require(path.join(__dirname, 'lib', 'http.router'));
 
 
-/*** export content model */
-exports.model = Content;
+/* export content model */
 exports.Content = Content;
 
 
-/*** export content router */
+/* export content router */
 exports.router = router;
 
 
-/*** export app */
+/* export app */
 Object.defineProperty(exports, 'app', {
   get() {
 
     //TODO bind oauth middlewares authenticate, token, authorize
 
-    /*** bind content router */
+    /* bind content router */
     app.mount(router);
     return app;
   }

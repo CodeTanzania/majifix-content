@@ -2,19 +2,24 @@
 
 /*** dependencies */
 const path = require('path');
-const chai = require('chai');
-const mongoose = require('mongoose');
-const expect = chai.expect;
+const { expect } = require('chai');
+const { Jurisdiction } = require('majifix-jurisdiction');
 const { Content } = require(path.join(__dirname, '..', '..'));
 
 describe('Content', function () {
 
+  let jurisdiction;
+
   before(function (done) {
-    mongoose.connect('mongodb://localhost/majifix-content', done);
+    Jurisdiction.remove(done);
   });
 
   before(function (done) {
-    Content.remove(done);
+    jurisdiction = Jurisdiction.fake();
+    jurisdiction.post(function (error, created) {
+      jurisdiction = created;
+      done(error, created);
+    });
   });
 
   describe('static post', function () {
@@ -24,6 +29,7 @@ describe('Content', function () {
     it('should be able to post', function (done) {
 
       content = Content.fake();
+      content.jurisdiction = jurisdiction;
 
       Content
         .post(content, function (error, created) {
@@ -61,6 +67,10 @@ describe('Content', function () {
 
   after(function (done) {
     Content.remove(done);
+  });
+
+  after(function (done) {
+    Jurisdiction.remove(done);
   });
 
 });
