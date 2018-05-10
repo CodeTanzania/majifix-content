@@ -20,6 +20,11 @@ describe('Content', function () {
       expect(Content.MODEL_NAME).to.be.equal('Content');
     });
 
+    it('should expose default locale `en` when not set', function () {
+      expect(Content.DEFAULT_LOCALE).to.exist;
+      expect(Content.DEFAULT_LOCALE).to.equal('en');
+    });
+
   });
 
 
