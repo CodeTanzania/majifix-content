@@ -10,6 +10,7 @@ const path = require('path');
 const _ = require('lodash');
 const async = require('async');
 const mongoose = require('mongoose');
+// mongoose.set('debug', true);
 const { Jurisdiction } = require('majifix-jurisdiction');
 const { Content, app, info } = require(path.join(__dirname, '..'));
 let samples = require('./samples')(20);
@@ -29,23 +30,26 @@ function boot() {
       });
     },
 
+    function clear(next) {
+      Jurisdiction.remove(function ( /*error, results*/ ) {
+        next();
+      });
+    },
+
     function seedJurisdiction(next) {
       const jurisdiction = Jurisdiction.fake();
-      Jurisdiction.remove(function ( /*error, results*/ ) {
-        jurisdiction.post(next);
-      });
+      jurisdiction.post(next);
     },
 
     function seed(jurisdiction, next) {
       /* fake contents */
-      samples = _.map(samples, function (sample, index) {
-        if ((index % 2 === 0)) {
-          sample.jurisdiction = jurisdiction;
-        }
-        return sample;
-      });
-
-      /* fake contents */
+      samples =
+        _.map(samples, function (sample, index) {
+          if ((index % 2 === 0)) {
+            sample.jurisdiction = jurisdiction;
+          }
+          return sample;
+        });
       Content.create(samples, next);
     }
 
