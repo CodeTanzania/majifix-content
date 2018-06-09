@@ -3,10 +3,10 @@
 /*** dependencies */
 const path = require('path');
 const { expect } = require('chai');
-const { Jurisdiction } = require('majifix-jurisdiction');
+const { Jurisdiction } = require('@codetanzania/majifix-jurisdiction');
 const { Content } = require(path.join(__dirname, '..', '..'));
 
-describe('Content', function () {
+describe.only('Content', function () {
 
   let jurisdiction;
 
@@ -102,8 +102,8 @@ describe('Content', function () {
     Content.remove(done);
   });
 
-  after(function (done) {
-    Jurisdiction.remove(done);
-  });
+  // after(function (done) {
+  //   Jurisdiction.remove(done);
+  // });
 
 });
