@@ -1,26 +1,28 @@
-majifix-content
-================
+# majifix-content
 
 [![Build Status](https://travis-ci.org/CodeTanzania/majifix-content.svg?branch=develop)](https://travis-ci.org/CodeTanzania/majifix-content)
 [![Dependencies Status](https://david-dm.org/CodeTanzania/majifix-content/status.svg?style=flat-square)](https://david-dm.org/CodeTanzania/majifix-content)
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/CodeTanzania/majifix-content/tree/develop)
 
-A representation of common information (i.e FAQ, Fee, Tarrifs etc) that are published by a [jurisdiction](https://github.com/CodeTanzania/majifix-jurisdiction) for general public.
+A representation of common information (i.e FAQ, Fee, Tariffs etc) that are published by a [jurisdiction](https://github.com/CodeTanzania/majifix-jurisdiction) for general public.
 
 ## Requirements
-- [NodeJS v9.9.0+](https://nodejs.org)
+
+- [NodeJS v8.11.1+](https://nodejs.org)
 - [MongoDB v3.4.10+](https://www.mongodb.com/)
-- [Mongoose v5.0.14+](https://github.com/Automattic/mongoose)
+- [Mongoose v5.1.2+](https://github.com/Automattic/mongoose)
 
 ## Installation
+
 ```sh
-$ npm install majifix-content --save
+npm install @codetanzania/majifix-content --save
 ```
 
 ## Usage
+
 ```js
 const mongoose = require('mongoose');
-const { app } = require('majifix-content');
+const { app } = require('@codetanzania/majifix-content');
 
 //connect to mongodb
 mongoose.connect(process.env.MONGODB_URI);
@@ -32,33 +34,40 @@ app.start(function(error, env) {
 ```
 
 ## Testing
-* Clone this repository
 
-* Install all development dependencies
+- Clone this repository
+
+- Install all development dependencies
+
 ```sh
-$ npm install
+npm install
 ```
 
-* Run example
+- Run example
+
 ```sh
-$ npm run dev
+npm run dev
 ```
 
-* Then run test
+- Then run test
+
 ```sh
-$ npm test
+npm test
 ```
 
 ## Contribute
+
 It will be nice, if you open an issue first so that we can know what is going on, then, fork this repo and push in your ideas. Do not forget to add a bit of test(s) of what value you adding.
 
 ## References
+
 - [Content_(media)](https://en.wikipedia.org/wiki/Content_(media))
 - [FAQ](https://en.wikipedia.org/wiki/FAQ)
 - [Fee](https://en.wikipedia.org/wiki/Fee)
 - [Tariff](https://simple.wikipedia.org/wiki/Tariff)
 
 ## Licence
+
 The MIT License (MIT)
 
 Copyright (c) 2018 CodeTanzania & Contributors
