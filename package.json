@@ -1,7 +1,7 @@
 {
-  "name": "majifix-content",
-  "version": "0.1.0",
-  "description": "A representation of common information (i.e FAQ, Fee, Tarrifs etc) that are published by a jurisdiction for general public.",
+  "name": "@codetanzania/majifix-content",
+  "version": "1.0.0",
+  "description": "A representation of common information (i.e FAQ, Fee, Tariffs etc) that are published by a jurisdiction for general public.",
   "main": "index.js",
   "scripts": {
     "test": "grunt test",
@@ -13,15 +13,14 @@
     "url": "https://github.com/CodeTanzania/majifix-content.git"
   },
   "keywords": [
-    "majifix",
     "codetanzania",
-    "open311",
-    "311",
-    "tanzania",
+    "majifix",
+    "majifix-module",
     "content",
+    "tariff",
     "faq",
     "fee",
-    "tariff"
+    "open311"
   ],
   "contributors": [
     {
@@ -42,12 +41,11 @@
   },
   "homepage": "https://github.com/CodeTanzania/majifix-content",
   "sandbox": {
-    "url": "https://majifix-content.herokuapp.com/v0.1.0/contents"
+    "url": "https://majifix-content.herokuapp.com/v1/contents"
   },
   "devDependencies": {
-    "body-parser": "^1.18.3",
+    "@benmaruchu/faker": "^4.2.1",
     "chai": "^4.1.2",
-    "faker": "git+https://github.com/Marak/faker.js.git",
     "grunt": "^1.0.3",
     "grunt-apidoc": "^0.11.0",
     "grunt-contrib-jshint": "^1.1.0",
@@ -76,7 +74,7 @@
     "randomcolor": "^0.5.3"
   },
   "engines": {
-    "node": ">=8.6.0",
-    "npm": ">=5.3.0"
+    "node": ">=8.11.1",
+    "npm": ">=5.6.0"
   }
 }
