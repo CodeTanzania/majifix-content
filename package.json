@@ -62,7 +62,7 @@
   },
   "dependencies": {
     "@codetanzania/majifix-common": "^0.4.1",
-    "@codetanzania/majifix-jurisdiction": "^1.1.0",
+    "@codetanzania/majifix-jurisdiction": "^1.2.0",
     "@lykmapipo/express-common": "^0.6.0",
     "async": "^2.6.1",
     "express": "^4.16.3",
