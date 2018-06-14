@@ -3,23 +3,23 @@
 
 /**
  * @name majifix-content
- * @description A representation of common information 
- * (i.e FAQ, Fee, Tarrifs etc) that are published by a jurisdiction 
+ * @description A representation of common information
+ * (i.e FAQ, Fee, Tarrifs etc) that are published by a jurisdiction
  * for general public
- * 
+ *
  * @author lally elias <lallyelias87@mail.com>
  * @since  0.1.0
  * @version 0.1.0
  * @example
- * 
- * const { app } = require('@lykmapipo/majifix-content');
+ *
+ * const { app } = require('@codetanzania/majifix-content');
  *
  * ...
- * 
+ *
  * app.start(function(error, info) {
  *	 ...
  * });
- * 
+ *
  */
 
 
@@ -43,10 +43,6 @@ const fields = [
   'contributors'
 ];
 const info = _.merge({}, _.pick(pkg, fields));
-
-
-/* ensure api version */
-process.env.API_VERSION = (process.env.API_VERSION || info.version);
 
 
 /* export package(module) info */

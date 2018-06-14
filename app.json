@@ -1,16 +1,16 @@
 {
   "name": "majifix-content",
-  "description": "A representation of common information (i.e FAQ, Fee, Tarrifs etc) that are published by a jurisdiction for general public.",
+  "description": "A representation of common information (i.e FAQ, Fee, Tariffs etc) that are published by a jurisdiction for general public.",
   "repository": "https://github.com/CodeTanzania/majifix-content.git",
   "keywords": [
-    "majifix",
     "codetanzania",
-    "open311",
-    "311",
-    "tanzania",
-    "account",
-    "customer",
-    "client"
+    "majifix",
+    "majifix-module",
+    "content",
+    "tariff",
+    "faq",
+    "fee",
+    "open311"
   ],
   "addons": [
     "mongolab"

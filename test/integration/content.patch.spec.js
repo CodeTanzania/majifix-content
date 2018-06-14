@@ -1,6 +1,6 @@
 'use strict';
 
-/*** dependencies */
+/* dependencies */
 const path = require('path');
 const { expect } = require('chai');
 const { Jurisdiction } = require('@codetanzania/majifix-jurisdiction');

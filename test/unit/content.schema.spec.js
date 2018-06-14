@@ -61,6 +61,8 @@ describe('Content', function () {
         expect(en.trim).to.be.true;
         expect(en.index).to.be.true;
         expect(en.searchable).to.be.true;
+        expect(en.fake).to.be.true;
+        expect(en.enum).to.exist;
 
       });
 
@@ -98,6 +100,7 @@ describe('Content', function () {
         expect(en.trim).to.be.true;
         expect(en.index).to.be.true;
         expect(en.searchable).to.be.true;
+        expect(en.fake).to.exist;
 
       });
 
@@ -135,6 +138,7 @@ describe('Content', function () {
         expect(en.trim).to.be.true;
         expect(en.index).to.be.true;
         expect(en.searchable).to.be.true;
+        expect(en.fake).to.exist;
 
       });
 
@@ -152,6 +156,19 @@ describe('Content', function () {
       expect(publishedAt.type).to.be.a('function');
       expect(publishedAt.type.name).to.be.equal('Date');
       expect(publishedAt.index).to.be.true;
+
+    });
+
+    it('should have extras field', function () {
+
+      const extras = Content.schema.tree.extras;
+      const instance = Content.schema.paths.extras.instance;
+
+      expect(instance).to.be.equal('Mixed');
+      expect(extras).to.exist;
+      expect(extras).to.be.an('object');
+      expect(extras.type).to.be.a('function');
+      expect(extras.type.name).to.be.equal('Mixed');
 
     });
 

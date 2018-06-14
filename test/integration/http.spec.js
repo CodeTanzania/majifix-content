@@ -1,13 +1,13 @@
 'use strict';
 
-/*** dependencies */
+/* dependencies */
 const path = require('path');
 const request = require('supertest');
 const { expect } = require('chai');
 const {
   Content,
   app,
-  info
+  router,
 } = require(path.join(__dirname, '..', '..'));
 
 
@@ -26,7 +26,7 @@ describe('Content', function () {
       content = Content.fake();
 
       request(app)
-        .post(`/v${info.version}/contents`)
+        .post(`/v${router.apiVersion}/contents`)
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
         .send(content)
@@ -51,7 +51,7 @@ describe('Content', function () {
     it('should handle HTTP GET on /contents', function (done) {
 
       request(app)
-        .get(`/v${info.version}/contents`)
+        .get(`/v${router.apiVersion}/contents`)
         .set('Accept', 'application/json')
         .expect(200)
         .expect('Content-Type', /json/)
@@ -77,7 +77,7 @@ describe('Content', function () {
     it('should handle HTTP GET on /contents/id:', function (done) {
 
       request(app)
-        .get(`/v${info.version}/contents/${content._id}`)
+        .get(`/v${router.apiVersion}/contents/${content._id}`)
         .set('Accept', 'application/json')
         .expect(200)
         .end(function (error, response) {
@@ -102,7 +102,7 @@ describe('Content', function () {
       const patch = content.fakeOnly('name');
 
       request(app)
-        .patch(`/v${info.version}/contents/${content._id}`)
+        .patch(`/v${router.apiVersion}/contents/${content._id}`)
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
         .send(patch)
@@ -130,7 +130,7 @@ describe('Content', function () {
       const put = content.fakeOnly('name');
 
       request(app)
-        .put(`/v${info.version}/contents/${content._id}`)
+        .put(`/v${router.apiVersion}/contents/${content._id}`)
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
         .send(put)
@@ -156,7 +156,7 @@ describe('Content', function () {
     it('should handle HTTP DELETE on /contents/:id', function (done) {
 
       request(app)
-        .delete(`/v${info.version}/contents/${content._id}`)
+        .delete(`/v${router.apiVersion}/contents/${content._id}`)
         .set('Accept', 'application/json')
         .expect(200)
         .end(function (error, response) {

@@ -1,9 +1,12 @@
 'use strict';
 
-/*** depedencies */
+/* dependencies */
 const _ = require('lodash');
-const faker = require('faker');
+const faker = require('@benmaruchu/faker');
+
+/* declarations */
 const groups = ['FAQ', 'Post'];
+
 
 function sample() {
   const group = groups[faker.random.number({ min: 0, max: 1 })];
@@ -12,7 +15,10 @@ function sample() {
     type: { en: group, sw: group },
     title: { en: faker.lorem.sentence(), sw: faker.lorem.sentence() },
     body: { en: faker.lorem.paragraph(), sw: faker.lorem.paragraph() },
-    publishedAt: new Date()
+    publishedAt: new Date(),
+    extras: {
+      image: faker.internet.avatar()
+    }
   };
 }
 
