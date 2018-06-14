@@ -1,4 +1,4 @@
-# v1.0.0 / 2018-06-12
+# v1.0.0 / 2018-06-14
 
 - Initial Release
 - Multilingual Support

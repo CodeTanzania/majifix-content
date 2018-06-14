@@ -41,10 +41,10 @@ describe('Content', function () {
           };
         });
       async
-        .parallel(fakes, function (error, created) {
-          contents = created;
-          done(error, created);
-        });
+      .parallel(fakes, function (error, created) {
+        contents = created;
+        done(error, created);
+      });
     });
 
     it('should be able to get without options', function (done) {

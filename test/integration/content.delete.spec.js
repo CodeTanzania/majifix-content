@@ -102,8 +102,8 @@ describe('Content', function () {
     Content.remove(done);
   });
 
-  // after(function (done) {
-  //   Jurisdiction.remove(done);
-  // });
+  after(function (done) {
+    Jurisdiction.remove(done);
+  });
 
 });
