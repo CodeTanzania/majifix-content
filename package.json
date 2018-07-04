@@ -1,6 +1,6 @@
 {
   "name": "@codetanzania/majifix-content",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A representation of common information (i.e FAQ, Fee, Tariffs etc) that are published by a jurisdiction for general public.",
   "main": "index.js",
   "scripts": {
