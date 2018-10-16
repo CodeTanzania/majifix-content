@@ -16,7 +16,7 @@ describe('Content', function () {
   describe('Rest API', function () {
 
     before(function (done) {
-      Content.remove(done);
+      Content.deleteMany(done);
     });
 
     let content;
@@ -179,7 +179,7 @@ describe('Content', function () {
 
 
     after(function (done) {
-      Content.remove(done);
+      Content.deleteMany(done);
     });
 
   });

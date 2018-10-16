@@ -12,7 +12,7 @@ describe('Content', function () {
   let jurisdiction;
 
   before(function (done) {
-    Jurisdiction.remove(done);
+    Jurisdiction.deleteMany(done);
   });
 
   before(function (done) {
@@ -24,7 +24,7 @@ describe('Content', function () {
   });
 
   before(function (done) {
-    Content.remove(done);
+    Content.deleteMany(done);
   });
 
   describe('get by id', function () {
@@ -98,11 +98,11 @@ describe('Content', function () {
   });
 
   after(function (done) {
-    Content.remove(done);
+    Content.deleteMany(done);
   });
 
   after(function (done) {
-    Jurisdiction.remove(done);
+    Jurisdiction.deleteMany(done);
   });
 
 });
