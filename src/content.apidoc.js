@@ -1,6 +1,3 @@
-'use strict';
-
-
 /**
  * @apiDefine Content  Content
  *
@@ -15,7 +12,6 @@
  * @version 1.0.0
  * @public
  */
-
 
 /**
  * @apiDefine Content
@@ -33,7 +29,6 @@
  * @apiSuccess {Date} updatedAt Date when content was last updated
  *
  */
-
 
 /**
  * @apiDefine Contents
@@ -59,7 +54,6 @@
  * @apiSuccess {Date} lastModified Date and time at which latest content
  * was last modified
  */
-
 
 /**
  * @apiDefine ContentSuccessResponse
@@ -93,7 +87,6 @@
  * }
  *
  */
-
 
 /**
  * @apiDefine ContentsSuccessResponse
@@ -135,26 +128,6 @@
  * }
  */
 
-
-/* dependencies */
-const path = require('path');
-const _ = require('lodash');
-const Router = require('@lykmapipo/express-common').Router;
-const { env } = require('@codetanzania/majifix-common');
-
-
-/* local constants */
-const API_VERSION = env.API_VERSION;
-const PATH_LIST = '/contents';
-const PATH_SINGLE = '/contents/:id';
-const PATH_JURISDICTION = '/jurisdictions/:jurisdiction/contents';
-
-
-/* declarations */
-const Content = require(path.join(__dirname, 'content.model'));
-const router = new Router({ version: API_VERSION });
-
-
 /**
  * @api {get} /contents List Contents
  * @apiVersion 1.0.0
@@ -171,34 +144,6 @@ const router = new Router({ version: API_VERSION });
  * @apiUse AuthorizationHeaderError
  * @apiUse AuthorizationHeaderErrorExample
  */
-router.get(PATH_LIST, function getContents(request, response, next) {
-
-  //obtain request options
-  const options = _.merge({}, request.mquery);
-
-  //query content
-  Content
-    .get(options, function onGetContents(error, results) {
-
-      //forward error
-      if (error) {
-        next(error);
-      }
-
-      //handle response
-      else {
-
-        //merge content types
-        results.types = Content.TYPES;
-
-        response.status(200);
-        response.json(results);
-      }
-
-    });
-
-});
-
 
 /**
  * @api {post} /contents Create New Content
@@ -216,30 +161,6 @@ router.get(PATH_LIST, function getContents(request, response, next) {
  * @apiUse AuthorizationHeaderError
  * @apiUse AuthorizationHeaderErrorExample
  */
-router.post(PATH_LIST, function postContent(request, response, next) {
-
-  //obtain request body
-  const body = _.merge({}, request.body);
-
-  //create content
-  Content
-    .post(body, function onPostContent(error, created) {
-
-      //forward error
-      if (error) {
-        next(error);
-      }
-
-      //handle response
-      else {
-        response.status(201);
-        response.json(created);
-      }
-
-    });
-
-});
-
 
 /**
  * @api {get} /contents/:id Get Existing Content
@@ -257,33 +178,6 @@ router.post(PATH_LIST, function postContent(request, response, next) {
  * @apiUse AuthorizationHeaderError
  * @apiUse AuthorizationHeaderErrorExample
  */
-router.get(PATH_SINGLE, function getContent(request, response, next) {
-
-  //obtain request options
-  const options = _.merge({}, request.mquery);
-
-  //obtain content id
-  options._id = request.params.id;
-
-  //query content by id
-  Content
-    .getById(options, function onGetContent(error, found) {
-
-      //forward error
-      if (error) {
-        next(error);
-      }
-
-      //handle response
-      else {
-        response.status(200);
-        response.json(found);
-      }
-
-    });
-
-});
-
 
 /**
  * @api {patch} /contents/:id Patch Existing Content
@@ -301,33 +195,6 @@ router.get(PATH_SINGLE, function getContent(request, response, next) {
  * @apiUse AuthorizationHeaderError
  * @apiUse AuthorizationHeaderErrorExample
  */
-router.patch(PATH_SINGLE, function patchContent(request, response, next) {
-
-  //obtain content id
-  const { id } = request.params;
-
-  //obtain request body
-  const patches = _.merge({}, request.body);
-
-  //update content
-  Content
-    .patch(id, patches, function onPatchContent(error, patched) {
-
-      //forward error
-      if (error) {
-        next(error);
-      }
-
-      //handle response
-      else {
-        response.status(200);
-        response.json(patched);
-      }
-
-    });
-
-});
-
 
 /**
  * @api {put} /contents/:id Put Existing Content
@@ -345,33 +212,6 @@ router.patch(PATH_SINGLE, function patchContent(request, response, next) {
  * @apiUse AuthorizationHeaderError
  * @apiUse AuthorizationHeaderErrorExample
  */
-router.put(PATH_SINGLE, function putContent(request, response, next) {
-
-  //obtain content id
-  const { id } = request.params;
-
-  //obtain request body
-  const updates = _.merge({}, request.body);
-
-  //update content
-  Content
-    .put(id, updates, function onPutContent(error, updated) {
-
-      //forward error
-      if (error) {
-        next(error);
-      }
-
-      //handle response
-      else {
-        response.status(200);
-        response.json(updated);
-      }
-
-    });
-
-});
-
 
 /**
  * @api {delete} /contents/:id Delete Existing Content
@@ -389,31 +229,6 @@ router.put(PATH_SINGLE, function putContent(request, response, next) {
  * @apiUse AuthorizationHeaderError
  * @apiUse AuthorizationHeaderErrorExample
  */
-router
-  .delete(PATH_SINGLE, function deleteContent(request, response, next) {
-
-    //obtain content id
-    const { id } = request.params;
-
-    //delete existing content
-    Content
-      .del(id, function onDeleteContent(error, deleted) {
-
-        //forward error
-        if (error) {
-          next(error);
-        }
-
-        //handle response
-        else {
-          response.status(200);
-          response.json(deleted);
-        }
-
-      });
-
-  });
-
 
 /**
  * @api {get} /jurisdictions/:jurisdiction/contents List Jurisdiction Contents
@@ -431,38 +246,3 @@ router
  * @apiUse AuthorizationHeaderError
  * @apiUse AuthorizationHeaderErrorExample
  */
-router.get(PATH_JURISDICTION, function getContents(request, response, next) {
-
-  //obtain request options
-  const { jurisdiction } = request.params;
-  const filter =
-    (jurisdiction ? { filter: { jurisdiction: jurisdiction } } : {});
-  const options =
-    _.merge({}, filter, request.mquery);
-
-  //query specific jurisdiction contents
-  Content
-    .get(options, function onGetContents(error, results) {
-
-      //forward error
-      if (error) {
-        next(error);
-      }
-
-      //handle response
-      else {
-
-        //merge content types
-        results.types = Content.TYPES;
-
-        response.status(200);
-        response.json(results);
-      }
-
-    });
-
-});
-
-
-/* expose content router */
-module.exports = router;
