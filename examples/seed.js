@@ -39,19 +39,16 @@ const seedContent = (jurisdiction, next) => {
 
 const seed = () => {
   seedEnd = Date.now();
-  waterfall(
-    [clearSeed, seedJurisdiction, seedContent],
-    (error, results) => {
-      if (error) {
-        throw error;
-      }
-      seedEnd = Date.now();
-
-      log('time', null, seedEnd - seedStart);
-      log('final', error, results);
-      process.exit(0);
+  waterfall([clearSeed, seedJurisdiction, seedContent], (error, results) => {
+    if (error) {
+      throw error;
     }
-  );
+    seedEnd = Date.now();
+
+    log('time', null, seedEnd - seedStart);
+    log('final', error, results);
+    process.exit(0);
+  });
 };
 
 // connect and seed
