@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Jurisdiction } from '@codetanzania/majifix-jurisdiction';
 import { expect, clear, create } from '@lykmapipo/mongoose-test-helpers';
 import { Content } from '../../src';
@@ -33,12 +34,12 @@ describe('Content', () => {
     });
 
     it('should throw if not exists', done => {
-      const fake = Content.fake();
+      const fake = Content.fake().toObject();
 
-      Content.patch(fake._id, fake, (error, updated) => {
+      Content.patch(fake._id, _.omit(fake, '_id'), (error, updated) => {
         expect(error).to.exist;
-        expect(error.status).to.exist;
-        expect(error.message).to.be.equal('Not Found');
+        // expect(error.status).to.exist;
+        expect(error.name).to.be.equal('DocumentNotFoundError');
         expect(updated).to.not.exist;
         done();
       });

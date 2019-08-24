@@ -2,11 +2,18 @@ import {
   clear as clearHttp,
   testRouter,
 } from '@lykmapipo/express-test-helpers';
-import { clear as clearDb, expect } from '@lykmapipo/mongoose-test-helpers';
+import {
+  clear as clearDb,
+  create,
+  expect,
+} from '@lykmapipo/mongoose-test-helpers';
+import { Jurisdiction } from '@codetanzania/majifix-jurisdiction';
 import { Content, contentRouter } from '../../src';
 
 describe('Content Rest API', () => {
+  const jurisdiction = Jurisdiction.fake();
   const content = Content.fake();
+  content.set({ jurisdiction });
 
   const options = {
     pathSingle: '/contents/:id',
@@ -15,9 +22,11 @@ describe('Content Rest API', () => {
     pathExport: '/contents/export/',
   };
 
+  before(done => clearDb(Content, Jurisdiction, done));
+
   before(() => clearHttp());
 
-  before(done => clearDb(done));
+  before(done => create(jurisdiction, done));
 
   it('should handle HTTP POST on /contents', done => {
     const { testPost } = testRouter(options, contentRouter);
@@ -29,7 +38,7 @@ describe('Content Rest API', () => {
         expect(body).to.exist;
         const created = new Content(body);
         expect(created._id).to.exist.and.be.eql(content._id);
-        expect(created.code).to.exist.and.be.eql(content.type);
+        expect(created.type).to.exist.and.be.eql(content.type);
         done(error, body);
       });
   });
@@ -79,7 +88,7 @@ describe('Content Rest API', () => {
         expect(body).to.exist;
         const found = new Content(body);
         expect(found._id).to.exist.and.be.eql(content._id);
-        expect(found.code).to.exist.and.be.eql(content.type);
+        expect(found.type).to.exist.and.be.eql(content.type);
         done(error, body);
       });
   });
@@ -96,7 +105,7 @@ describe('Content Rest API', () => {
         expect(body).to.exist;
         const patched = new Content(body);
         expect(patched._id).to.exist.and.be.eql(content._id);
-        expect(patched.code).to.exist.and.be.eql(content.type);
+        expect(patched.type).to.exist.and.be.eql(content.type);
         done(error, body);
       });
   });
@@ -113,7 +122,7 @@ describe('Content Rest API', () => {
         expect(body).to.exist;
         const patched = new Content(body);
         expect(patched._id).to.exist.and.be.eql(content._id);
-        expect(patched.code).to.exist.and.be.eql(content.type);
+        expect(patched.type).to.exist.and.be.eql(content.type);
         done(error, body);
       });
   });
@@ -129,12 +138,12 @@ describe('Content Rest API', () => {
         expect(body).to.exist;
         const patched = new Content(body);
         expect(patched._id).to.exist.and.be.eql(content._id);
-        expect(patched.code).to.exist.and.be.eql(content.type);
+        expect(patched.type).to.exist.and.be.eql(content.type);
         done(error, body);
       });
   });
 
   after(() => clearHttp());
 
-  after(done => clearDb(done));
+  after(done => clearDb(Content, Jurisdiction, done));
 });
