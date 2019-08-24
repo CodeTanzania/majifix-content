@@ -1,119 +1,83 @@
-'use strict';
+import _ from 'lodash';
+import { Jurisdiction } from '@codetanzania/majifix-jurisdiction';
+import { expect, clear, create } from '@lykmapipo/mongoose-test-helpers';
+import { Content } from '../../src';
 
-/* dependencies */
-const path = require('path');
-const { expect } = require('chai');
-const { Jurisdiction } = require('@codetanzania/majifix-jurisdiction');
-const { Content } = require(path.join(__dirname, '..', '..'));
+describe('Content', () => {
+  const jurisdiction = Jurisdiction.fake();
 
-describe('Content', function () {
+  before(done => clear(Content, Jurisdiction, done));
+  before(done => create(jurisdiction, done));
 
-  let jurisdiction;
-
-  before(function (done) {
-    Jurisdiction.deleteMany(done);
-  });
-
-  before(function (done) {
-    jurisdiction = Jurisdiction.fake();
-    jurisdiction.post(function (error, created) {
-      jurisdiction = created;
-      done(error, created);
-    });
-  });
-
-  before(function (done) {
-    Content.deleteMany(done);
-  });
-
-  describe('static patch', function () {
-
+  describe('static patch', () => {
     let content;
 
-    before(function (done) {
+    before(done => {
       content = Content.fake();
       content.jurisdiction = jurisdiction;
-      content
-        .post(function (error, created) {
-          content = created;
-          done(error, created);
-        });
+      content.post((error, created) => {
+        content = created;
+        done(error, created);
+      });
     });
 
-    it('should be able to patch', function (done) {
-
+    it('should be able to patch', done => {
       content = content.fakeOnly('title.en');
 
-      Content
-        .patch(content._id, content, function (error, updated) {
-          expect(error).to.not.exist;
-          expect(updated).to.exist;
-          expect(updated._id).to.eql(content._id);
-          expect(updated.title.en).to.eql(content.title.en);
-          done(error, updated);
-        });
+      Content.patch(content._id, content, (error, updated) => {
+        expect(error).to.not.exist;
+        expect(updated).to.exist;
+        expect(updated._id).to.eql(content._id);
+        expect(updated.title.en).to.eql(content.title.en);
+        done(error, updated);
+      });
     });
 
-    it('should throw if not exists', function (done) {
+    it('should throw if not exists', done => {
+      const fake = Content.fake().toObject();
 
-      const fake = Content.fake();
-
-      Content
-        .patch(fake._id, fake, function (error, updated) {
-          expect(error).to.exist;
-          expect(error.status).to.exist;
-          expect(error.message).to.be.equal('Not Found');
-          expect(updated).to.not.exist;
-          done();
-        });
+      Content.patch(fake._id, _.omit(fake, '_id'), (error, updated) => {
+        expect(error).to.exist;
+        // expect(error.status).to.exist;
+        expect(error.name).to.be.equal('DocumentNotFoundError');
+        expect(updated).to.not.exist;
+        done();
+      });
     });
-
   });
 
-  describe('instance patch', function () {
-
+  describe('instance patch', () => {
     let content;
 
-    before(function (done) {
+    before(done => {
       const fake = Content.fake();
-      fake
-        .post(function (error, created) {
-          content = created;
-          done(error, created);
-        });
+      fake.post((error, created) => {
+        content = created;
+        done(error, created);
+      });
     });
 
-    it('should be able to patch', function (done) {
+    it('should be able to patch', done => {
       content = content.fakeOnly('title.en');
 
-      content
-        .patch(function (error, updated) {
-          expect(error).to.not.exist;
-          expect(updated).to.exist;
-          expect(updated._id).to.eql(content._id);
-          expect(updated.title.en).to.eql(content.title.en);
-          done(error, updated);
-        });
+      content.patch((error, updated) => {
+        expect(error).to.not.exist;
+        expect(updated).to.exist;
+        expect(updated._id).to.eql(content._id);
+        expect(updated.title.en).to.eql(content.title.en);
+        done(error, updated);
+      });
     });
 
-    it('should throw if not exists', function (done) {
-      content
-        .patch(function (error, updated) {
-          expect(error).to.not.exist;
-          expect(updated).to.exist;
-          expect(updated._id).to.eql(content._id);
-          done();
-        });
+    it('should throw if not exists', done => {
+      content.patch((error, updated) => {
+        expect(error).to.not.exist;
+        expect(updated).to.exist;
+        expect(updated._id).to.eql(content._id);
+        done();
+      });
     });
-
   });
 
-  after(function (done) {
-    Content.deleteMany(done);
-  });
-
-  after(function (done) {
-    Jurisdiction.deleteMany(done);
-  });
-
+  after(done => clear(Content, Jurisdiction, done));
 });
