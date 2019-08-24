@@ -1,109 +1,74 @@
-'use strict';
+import { Jurisdiction } from '@codetanzania/majifix-jurisdiction';
+import { expect, clear, create } from '@lykmapipo/mongoose-test-helpers';
+import { Content } from '../../src';
 
-/* dependencies */
-const path = require('path');
-const { expect } = require('chai');
-const { Jurisdiction } = require('@codetanzania/majifix-jurisdiction');
-const { Content } = require(path.join(__dirname, '..', '..'));
+describe('Content', () => {
+  const jurisdiction = Jurisdiction.fake();
 
-describe('Content', function () {
+  before(done => clear(Content, Jurisdiction, done));
+  before(done => create(jurisdiction, done));
 
-  let jurisdiction;
-
-  before(function (done) {
-    Jurisdiction.deleteMany(done);
-  });
-
-  before(function (done) {
-    jurisdiction = Jurisdiction.fake();
-    jurisdiction.post(function (error, created) {
-      jurisdiction = created;
-      done(error, created);
-    });
-  });
-
-  before(function (done) {
-    Content.deleteMany(done);
-  });
-
-  describe('static delete', function () {
-
+  describe('static delete', () => {
     let content;
 
-    before(function (done) {
+    before(done => {
       content = Content.fake();
       content.jurisdiction = jurisdiction;
-      content
-        .post(function (error, created) {
-          content = created;
-          done(error, created);
-        });
+      content.post((error, created) => {
+        content = created;
+        done(error, created);
+      });
     });
 
-    it('should be able to delete', function (done) {
-      Content
-        .del(content._id, function (error, deleted) {
-          expect(error).to.not.exist;
-          expect(deleted).to.exist;
-          expect(deleted._id).to.eql(content._id);
-          done(error, deleted);
-        });
+    it('should be able to delete', done => {
+      Content.del(content._id, (error, deleted) => {
+        expect(error).to.not.exist;
+        expect(deleted).to.exist;
+        expect(deleted._id).to.eql(content._id);
+        done(error, deleted);
+      });
     });
 
-    it('should throw if not exists', function (done) {
-      Content
-        .del(content._id, function (error, deleted) {
-          expect(error).to.exist;
-          expect(error.status).to.exist;
-          expect(error.message).to.be.equal('Not Found');
-          expect(deleted).to.not.exist;
-          done();
-        });
+    it('should throw if not exists', done => {
+      Content.del(content._id, (error, deleted) => {
+        expect(error).to.exist;
+        // expect(error.status).to.exist;
+        expect(error.name).to.be.equal('DocumentNotFoundError');
+        expect(deleted).to.not.exist;
+        done();
+      });
     });
-
   });
 
-  describe('instance delete', function () {
-
+  describe('instance delete', () => {
     let content;
 
-    before(function (done) {
+    before(done => {
       const fake = Content.fake();
-      fake
-        .post(function (error, created) {
-          content = created;
-          done(error, created);
-        });
+      fake.post((error, created) => {
+        content = created;
+        done(error, created);
+      });
     });
 
-    it('should be able to delete', function (done) {
-      content
-        .del(function (error, deleted) {
-          expect(error).to.not.exist;
-          expect(deleted).to.exist;
-          expect(deleted._id).to.eql(content._id);
-          done(error, deleted);
-        });
+    it('should be able to delete', done => {
+      content.del((error, deleted) => {
+        expect(error).to.not.exist;
+        expect(deleted).to.exist;
+        expect(deleted._id).to.eql(content._id);
+        done(error, deleted);
+      });
     });
 
-    it('should throw if not exists', function (done) {
-      content
-        .del(function (error, deleted) {
-          expect(error).to.not.exist;
-          expect(deleted).to.exist;
-          expect(deleted._id).to.eql(content._id);
-          done();
-        });
+    it('should throw if not exists', done => {
+      content.del((error, deleted) => {
+        expect(error).to.not.exist;
+        expect(deleted).to.exist;
+        expect(deleted._id).to.eql(content._id);
+        done();
+      });
     });
-
   });
 
-  after(function (done) {
-    Content.deleteMany(done);
-  });
-
-  after(function (done) {
-    Jurisdiction.deleteMany(done);
-  });
-
+  after(done => clear(Content, Jurisdiction, done));
 });

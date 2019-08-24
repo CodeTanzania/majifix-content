@@ -1,76 +1,47 @@
-'use strict';
+import { Jurisdiction } from '@codetanzania/majifix-jurisdiction';
+import { expect, clear, create } from '@lykmapipo/mongoose-test-helpers';
+import { Content } from '../../src';
 
-/* dependencies */
-const path = require('path');
-const { expect } = require('chai');
-const { Jurisdiction } = require('@codetanzania/majifix-jurisdiction');
-const { Content } = require(path.join(__dirname, '..', '..'));
+describe('Content', () => {
+  const jurisdiction = Jurisdiction.fake();
 
-describe('Content', function () {
+  before(done => clear(Content, Jurisdiction, done));
+  before(done => create(jurisdiction, done));
 
-  let jurisdiction;
-
-  before(function (done) {
-    Jurisdiction.deleteMany(done);
-  });
-
-  before(function (done) {
-    jurisdiction = Jurisdiction.fake();
-    jurisdiction.post(function (error, created) {
-      jurisdiction = created;
-      done(error, created);
-    });
-  });
-
-  describe('static post', function () {
-
+  describe('static post', () => {
     let content;
 
-    it('should be able to post', function (done) {
-
+    it('should be able to post', done => {
       content = Content.fake();
       content.jurisdiction = jurisdiction;
 
-      Content
-        .post(content, function (error, created) {
-          expect(error).to.not.exist;
-          expect(created).to.exist;
-          expect(created._id).to.eql(content._id);
-          expect(created.type.en).to.eql(content.type.en);
-          expect(created.title.en).to.eql(content.title.en);
-          done(error, created);
-        });
+      Content.post(content, (error, created) => {
+        expect(error).to.not.exist;
+        expect(created).to.exist;
+        expect(created._id).to.eql(content._id);
+        expect(created.type.en).to.eql(content.type.en);
+        expect(created.title.en).to.eql(content.title.en);
+        done(error, created);
+      });
     });
-
   });
 
-  describe('instance post', function () {
-
+  describe('instance post', () => {
     let content;
 
-    it('should be able to post', function (done) {
-
+    it('should be able to post', done => {
       content = Content.fake();
 
-      content
-        .post(function (error, created) {
-          expect(error).to.not.exist;
-          expect(created).to.exist;
-          expect(created._id).to.eql(content._id);
-          expect(created.type.en).to.eql(content.type.en);
-          expect(created.title.en).to.eql(content.title.en);
-          done(error, created);
-        });
+      content.post((error, created) => {
+        expect(error).to.not.exist;
+        expect(created).to.exist;
+        expect(created._id).to.eql(content._id);
+        expect(created.type.en).to.eql(content.type.en);
+        expect(created.title.en).to.eql(content.title.en);
+        done(error, created);
+      });
     });
-
   });
 
-  after(function (done) {
-    Content.deleteMany(done);
-  });
-
-  after(function (done) {
-    Jurisdiction.deleteMany(done);
-  });
-
+  after(done => clear(Content, Jurisdiction, done));
 });
