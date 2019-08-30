@@ -252,12 +252,13 @@ ContentSchema.index(INDEX_UNIQUE, { unique: true });
  * @name validate
  * @description content schema pre validation hook
  * @param {Function} done callback to invoke on success or error
+ * @returns {object|Error} valid instance or error
  * @since 0.1.0
  * @version 1.0.0
  * @private
  */
-ContentSchema.pre('validate', function preValidate(next) {
-  return this.preValidate(next);
+ContentSchema.pre('validate', function preValidate(done) {
+  return this.preValidate(done);
 });
 
 /*
@@ -286,7 +287,7 @@ ContentSchema.methods.preValidate = function preValidate(done) {
   );
 
   // continue
-  return done();
+  return done(null, this);
 };
 
 /*
