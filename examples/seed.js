@@ -8,7 +8,6 @@ const { Content } = require('../lib');
 let seedStart;
 let seedEnd;
 
-/* eslint-disable */
 const log = (stage, error, results) => {
   if (error) {
     console.error(`${stage} seed error`, error);
@@ -19,7 +18,6 @@ const log = (stage, error, results) => {
     console.info(`${stage} seed result`, val);
   }
 };
-/* eslint-enable */
 
 const clearSeed = next => clear(Content, Jurisdiction, () => next());
 
@@ -28,10 +26,9 @@ const seedJurisdiction = next => Jurisdiction.fake().post(next);
 const seedContent = (jurisdiction, next) => {
   let contents = Content.fake(50);
 
-  contents = _.forEach(contents, group => {
-    const sample = group;
-    sample.jurisdiction = jurisdiction;
-    return sample;
+  contents = _.forEach(contents, content => {
+    content.set({ jurisdiction });
+    return content;
   });
 
   Content.create(contents, next);

@@ -15,9 +15,10 @@ A representation of common information (i.e FAQ, Fee, Tariffs etc) that are publ
 
 ## Requirements
 
-- [NodeJS v8.11.1+](https://nodejs.org)
-- [MongoDB v3.4.10+](https://www.mongodb.com/)
-- [Mongoose v5.1.2+](https://github.com/Automattic/mongoose)
+- [NodeJS v12+](https://nodejs.org)
+- [Npm v6+](https://www.npmjs.com/)
+- [MongoDB v4+](https://www.mongodb.com/)
+- [Mongoose v5.6+](https://github.com/Automattic/mongoose)
 
 ## Installation
 
