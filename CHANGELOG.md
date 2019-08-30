@@ -1,3 +1,28 @@
+#### 1.3.0 (2019-08-30)
+
+##### Chores
+
+* **deps:**
+  *  remove unused ([9a0fce9e](https://github.com/CodeTanzania/majifix-content/commit/9a0fce9e040a05386d149258d84323d8fc68d540))
+  *  force latest version & audit fix ([e252c156](https://github.com/CodeTanzania/majifix-content/commit/e252c1567182ece81675f636b4c761a6077fc7c6))
+  *  force latest version & audit fix ([e330de7b](https://github.com/CodeTanzania/majifix-content/commit/e330de7b08025f4e5a5cdcbbd64709818a19cf2e))
+  *  force latest version & audit fix ([7df8aaab](https://github.com/CodeTanzania/majifix-content/commit/7df8aaab4a3cb4dc338fcabd565956c61247c9d3))
+* **examples:**  improve sample app & seed ([7c154fad](https://github.com/CodeTanzania/majifix-content/commit/7c154fad081db2e25bdd0e5d7a90de906e81a1d6))
+* **configs:**  update eslint configs ([d5a28dc4](https://github.com/CodeTanzania/majifix-content/commit/d5a28dc465f3245ccd595c749c87f68336c793c5))
+*  add package keywords ([002acb42](https://github.com/CodeTanzania/majifix-content/commit/002acb4211d4a8514cb5626444b16fa731a8f1dd))
+
+##### Documentation Changes
+
+*  update requirements version ([372382a1](https://github.com/CodeTanzania/majifix-content/commit/372382a13a4539743a9ca2619bb47094d598df57))
+
+##### Code Style Changes
+
+* **model:**  improve jsdocs ([b4c09c1b](https://github.com/CodeTanzania/majifix-content/commit/b4c09c1b1efc329b89b6c5c5151569fdb51afbe3))
+
+##### Tests
+
+* **unit:**  add type field schema spec ([2e0c4eb2](https://github.com/CodeTanzania/majifix-content/commit/2e0c4eb27c1c86dcbcc350ca74c316a839eae054))
+
 #### 1.2.0 (2019-08-24)
 
 ##### Chores
