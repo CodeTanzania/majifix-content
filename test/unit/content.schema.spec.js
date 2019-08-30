@@ -17,35 +17,21 @@ describe('Content', () => {
       expect(jurisdiction.autopopulate).to.exist.and.be.an('object');
     });
 
-    describe.skip('type', () => {
-      it('should be an embedded subdocument', () => {
-        const { type } = Content.schema.tree;
-        const { instance } = Content.schema.paths.type;
-        const { tree } = Content.schema.tree.type;
+    it('should have type field', () => {
+      const { type } = Content.schema.tree;
+      const { instance } = Content.schema.paths.type;
 
-        expect(instance).to.be.equal('Embedded');
-        expect(type).to.exist;
-        expect(type).to.be.an('object');
-        expect(tree).to.exist;
-        expect(tree.en).to.exist;
-      });
-
-      it('should have type `en` locale field', () => {
-        const { instance } = Content.schema.paths.type.schema.paths.en;
-        const { en } = Content.schema.tree.type.tree;
-
-        expect(instance).to.be.equal('String');
-        expect(en).to.exist;
-        expect(en).to.be.an('object');
-        expect(en.type).to.be.a('function');
-        expect(en.type.name).to.be.equal('String');
-        expect(en.required).to.be.true;
-        expect(en.trim).to.be.true;
-        expect(en.index).to.be.true;
-        expect(en.searchable).to.be.true;
-        expect(en.fake).to.be.true;
-        expect(en.enum).to.exist;
-      });
+      expect(instance).to.be.equal('String');
+      expect(type).to.exist;
+      expect(type).to.be.an('object');
+      expect(type.type).to.be.a('function');
+      expect(type.type.name).to.be.equal('String');
+      expect(type.required).to.be.true;
+      expect(type.trim).to.be.true;
+      expect(type.index).to.be.true;
+      expect(type.searchable).to.be.true;
+      expect(type.fake).to.be.true;
+      expect(type.enum).to.exist;
     });
 
     describe('title', () => {
