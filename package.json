@@ -92,18 +92,13 @@
     "lint-staged": "^9.2.5",
     "lodash.template": "^4.5.0",
     "mocha": "^6.2.0",
-    "mongoose": "5.6.9",
+    "mongoose": "5.6.11",
     "npm-check-updates": "^3.1.21",
     "nyc": "^14.1.1",
     "prettier": "^1.18.2",
     "rimraf": "^3.0.0",
     "rollup": "^1.20.3",
-    "shelljs": "^0.8.3",
-    "sinon": "7.4.1",
-    "sinon-chai": "3.3.0",
-    "sinon-mongoose": "2.3.0",
-    "supertest": "4.0.2",
-    "winston": "^3.2.1"
+    "shelljs": "^0.8.3"
   },
   "peerDependencies": {
     "mongoose": ">=5.6.11"
@@ -122,7 +117,6 @@
     "express": ">=4.17.1",
     "lodash": ">=4.17.15",
     "moment": ">=2.24.0",
-    "mongoose-geojson-schemas": ">=0.10.9",
     "mongoose-locale-schema": ">=0.4.0",
     "mongoose-rest-actions": ">=0.28.8"
   },
