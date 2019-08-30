@@ -27,11 +27,10 @@
     "codetanzania",
     "majifix",
     "majifix-module",
-    "content",
-    "tariff",
-    "faq",
-    "fee",
-    "open311"
+    "open311",
+    "citizen",
+    "feedback",
+    "content"
   ],
   "repository": {
     "type": "git",
